@@ -121,3 +121,9 @@ find . -type f \( -name '*.rs' -o -name '*.py' -o -name '*.md' \) ...
 ```bash
 find . -type f -not -path '*/.*' -not -path '*/target/*' -not -path '*/node_modules/*' -not -path '*/tests/*' -not -name '*.md' ...
 ```
+
+## PowerShell Version
+
+```powershell
+powershell -NoProfile -Command "$files = Get-ChildItem -File -Recurse | Where-Object { $_.FullName -notmatch '\\\.|\\target\\|\\node_modules\\' }; $stats = $files | Get-Content -Raw -ErrorAction Ignore | Measure-Object -Line -Character; Write-Host ('Files:      ' + $files.Count); Write-Host ('Lines:      ' + $stats.Lines); Write-Host ('Characters: ' + $stats.Characters)"
+```
